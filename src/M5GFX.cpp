@@ -2059,7 +2059,7 @@ The usage of each pin is as follows.
                 auto p = new Panel_ILI9881C();
                 _panel_last.reset(p);
                 auto det = p->config_detail();
-                det.dpi_freq_mhz = 60;
+                det.dpi_freq_mhz = 80;
                 det.hsync_back_porch = 140;
                 det.hsync_pulse_width = 40;
                 det.hsync_front_porch = 40;
