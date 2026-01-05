@@ -1927,7 +1927,6 @@ The usage of each pin is as follows.
       
       if (board == 0 || board == board_t::board_M5StickS3)
       {
-        ESP_LOGI(LIBRARY_NAME, "[Autodetect] board_M5StickS3");
         gpio::pin_backup_t backup_pins[] = { GPIO_NUM_21, GPIO_NUM_39, GPIO_NUM_40, GPIO_NUM_41, GPIO_NUM_45, GPIO_NUM_47, GPIO_NUM_48 };
         auto result = lgfx::gpio::command(
           (const uint8_t[]) {
@@ -1952,6 +1951,7 @@ The usage of each pin is as follows.
           id = _read_panel_id(bus_spi, GPIO_NUM_41);
           if ((id & 0xFB) == 0x81) // 0x81 or 0x85
           { //  check panel (ST7789)
+            ESP_LOGI(LIBRARY_NAME, "[Autodetect] board_M5StickS3");
             board = board_t::board_M5StickS3;
             static constexpr uint8_t m5_pm1_i2c_addr = 0x6E;
             lgfx::i2c::init(I2C_NUM_1, GPIO_NUM_47, GPIO_NUM_48);
