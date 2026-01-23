@@ -693,13 +693,13 @@ namespace lgfx
 
 #pragma GCC diagnostic pop
 
-      *reg(SPI_USER_REG(spi_port)) = SPI_USR_MOSI | SPI_USR_MISO | SPI_DOUTDIN;  // need SD card access (full duplex setting)
-      *reg(SPI_CTRL_REG(spi_port)) = 0;
+      writereg(SPI_USER_REG(spi_port), SPI_USR_MOSI | SPI_USR_MISO | SPI_DOUTDIN);  // need SD card access (full duplex setting)
+      writereg(SPI_CTRL_REG(spi_port), 0);
       #if defined ( SPI_CTRL1_REG )
-      *reg(SPI_CTRL1_REG(spi_port)) = 0;
+      writereg(SPI_CTRL1_REG(spi_port), 0);
       #endif
       #if defined ( SPI_CTRL2_REG )
-      *reg(SPI_CTRL2_REG(spi_port)) = 0;
+      writereg(SPI_CTRL2_REG(spi_port), 0);
       #endif
 
       return {};
@@ -745,7 +745,7 @@ namespace lgfx
           ESP_LOGW("LGFX", "Failed to spi_device_acquire_bus. ");
         }
 #if defined ( SOC_GDMA_SUPPORTED )
-        *reg(SPI_DMA_CONF_REG((spi_host + 1))) = 0; /// Clear previous transfer
+        writereg(SPI_DMA_CONF_REG((spi_host + 1)), 0); /// Clear previous transfer
 #endif
       }
 #endif
