@@ -64,6 +64,7 @@ Contributors:
   #include <soc/apb_ctrl_reg.h>
  #endif
 #endif
+
 #include <soc/efuse_reg.h>
 
 #include <esp_log.h>
@@ -156,19 +157,22 @@ Contributors:
 #endif
 
 
+
 #if defined (CONFIG_IDF_TARGET_ESP32C6) || defined (CONFIG_IDF_TARGET_ESP32P4) || ( defined (CONFIG_IDF_TARGET_ESP32C3) && ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 3, 4) )
  #define LGFX_GPIO_IN_SEL_CFG_REG
 #endif
+
+
 
 namespace lgfx
 {
  inline namespace v1
  {
 //----------------------------------------------------------------------------
-  static __attribute__ ((always_inline)) inline volatile uint32_t* reg(uint32_t addr) { return (volatile uint32_t *)ETS_UNCACHED_ADDR(addr); }
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Warray-bounds"
   static __attribute__ ((always_inline)) inline void writereg(uint32_t addr, uint32_t value) { *(volatile uint32_t*)addr = value; }
+  static __attribute__ ((always_inline)) inline volatile uint32_t* reg(uint32_t addr) { return (volatile uint32_t *)ETS_UNCACHED_ADDR(addr); }
 #pragma GCC diagnostic pop
 
   static int search_pin_number(int peripheral_sig)
