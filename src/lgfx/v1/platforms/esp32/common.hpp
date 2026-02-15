@@ -26,6 +26,9 @@ Contributors:
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <driver/gpio.h>
+#if __has_include(<driver/i2c_master.h>)
+#include <driver/i2c_master.h>
+#endif
 #include <sdkconfig.h>
 #include <soc/soc.h>
 #include <soc/spi_reg.h>
@@ -324,6 +327,9 @@ protected:
     cpp::result<void, error_t> init(int i2c_port);
     cpp::result<int, error_t> getPinSDA(int i2c_port);
     cpp::result<int, error_t> getPinSCL(int i2c_port);
+#if __has_include(<driver/i2c_master.h>)
+    i2c_master_bus_handle_t getBusHandle(int i2c_port);
+#endif
 
     struct i2c_temporary_switcher_t
     {

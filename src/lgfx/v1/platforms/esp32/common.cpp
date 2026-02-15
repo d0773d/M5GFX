@@ -1357,6 +1357,16 @@ namespace lgfx
       return i2c_context[i2c_port].pin_scl;
     }
 
+#if __has_include(<driver/i2c_master.h>)
+    i2c_master_bus_handle_t getBusHandle(int i2c_port)
+    {
+      if (i2c_port >= I2C_NUM_MAX || i2c_port < 0) {
+        return nullptr;
+      }
+      return i2c_context[i2c_port].i2c_bus_handle;
+    }
+#endif
+
     cpp::result<void, error_t> init(int i2c_port)
     {
       gpio_num_t pin_sda = i2c_context[i2c_port].pin_sda;
